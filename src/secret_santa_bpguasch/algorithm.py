@@ -166,12 +166,13 @@ class SecretSanta:
 
         givers, receivers, pairings = self.__restart_pairings()
 
-        while True:
+        # Go until we have assigned each giver a receiver
+        while givers:
             # Take a random giver and remove it from the list
             giver = random.choice(givers)
             givers.remove(giver)
 
-            # An invalid pairing was done. There's nobody left who the giver can gift to. Restart the procedure
+            # There is nobody left who the giver can gift to. Restart the procedure
             if all(receiver in self.__participants[giver]['avoidGiftingTo'] for receiver in receivers):
                 givers, receivers, pairings = self.__restart_pairings()
                 continue
@@ -185,10 +186,7 @@ class SecretSanta:
             receivers.remove(receiver)
             pairings.append([giver, receiver])
 
-            # We have finished if our list of givers is empty (we could check for receivers as well)
-            if not givers:
-                break
-
+        # Return pairings sorted by giver to better compare results when printed in the console
         return sorted(pairings, key=lambda x: x[0])
 
     def __init__(self, game_config: Game, email_config: EmailServer, participants: dict):

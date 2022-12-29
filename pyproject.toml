@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "secret_santa_bpguasch"
-version = "0.0.1"
+version = "0.0.3"
 authors = [
   { name="Borja Pérez Guasch", email="bpguasch@icloud.com" },
 ]

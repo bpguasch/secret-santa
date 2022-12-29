@@ -37,7 +37,7 @@ class EmailServer:
 
 class Game:
     """
-    Class that encapsulates gane configuration parameters
+    Class that encapsulates game configuration parameters
     """
 
     def __body_generator_func(self, pairing: list) -> str:

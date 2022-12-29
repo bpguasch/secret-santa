@@ -1,11 +1,23 @@
 # Secret Santa
 Python implementation of a Secret Santa generator that notifies participants by email of whom they have to gift. Allows for defining restrictions between participants to prevent somebody from gifting specific people.
 
+Enjoy it and have fun 😁 I'll be happy to know if you use it, so don't hesitate to contact me!
+
 ## In this page
+- [Features](#features)
 - [Installation instructions](#installation-instructions)
 - [Usage instructions](#usage-instructions)
 - [Full working example](#full-working-example)
-- [Documentation]()
+- [Documentation](#documentation)
+
+## Features
+This package provides the following functionalities:
+
+- **100% free Secret Santa generator**: generate with very few lines of code the pairings for your yearly family Secret Santa! You only need to specify the participants.
+- **Specify avoid rules**: easily specify which participants should avoid whom and let the algorithm work its magic! If you provide too many rules and the scenario cannot be solved, you will be rapidly alerted.
+- **Communication via email**: communicate each participant by email whom they have to gift. You can send the emails using any account that you own.
+- **Email body customisation**: provide your own email template for the automatically generated emails.
+- **Dry run mode**: test your rules in a safe environment that prevents emails from being sent.
 
 ## Installation instructions
 
@@ -168,3 +180,95 @@ if __name__ == '__main__':
 
     secret_santa.dry_run()
 ```
+
+## Documentation
+
+The **secret-santa-bpguasch** Python package is organised in different modules. An overview of the classes contained in each module that can be worked with is provided below. Check the docstring for a detailed description of each method parameter:
+
+### secret_santa_bpguasch.config
+
+> A module with classes that encapsulate configuration attributes.
+
+<details>
+    <summary>Click to show package contents</summary>
+
+#### InvalidConfigurationException
+
+Exception subclass that represents an invalid configuration, either because the data is wrong formatted or because the scenario cannot be solved given the specified restrictions.
+
+#### EmailServer
+
+Class that encapsulates email server configuration parameters
+
+###### Constructor
+
+```python
+EmailServer(host: str, port: int, username: str, password: str)
+```
+
+Parameters:
+
+| **Name**  | **Type** | **Description**       |
+|-----------|----------|-----------------------|
+| host      | `str`    | Email server host     |
+| port      | `int`    | Email server port     |
+| username  | `str`    | Email server username |
+| password  | `str`    | Email server password |
+
+#### Game
+
+Class that encapsulates game configuration parameters
+
+###### Constructor
+
+```python
+Game(name: str, budget: float, subject: str, body_generator_func=None)
+```
+
+Parameters:
+
+| **Name**            | **Type**     | **Description**                                                                 |
+|---------------------|--------------|---------------------------------------------------------------------------------|
+| name                | `str`        | Game name. Will appear as the sender identity (name)                            |
+| budget              | `float`      | Budget for the present. Will appear in the default email body                   |
+| subject             | `str`        | Subject of the email that each participant receives                             |
+| body_generator_func | `descriptor` | Descriptor of a method used to generate a custom email body for a given pairing |
+
+</details>
+
+### secret_santa_bpguasch.algorithm
+
+> A module with the class that implements the Secret Santa algorithm.
+
+<details>
+    <summary>Click to show package contents</summary>
+    
+#### SecretSanta
+
+Class that implements the Secret Santa algorithm and participants notification
+
+###### Constructor
+
+```python
+SecretSanta(game_config: Game, email_config: EmailServer, participants: dict)
+```
+
+Parameters:
+
+| **Name**            | **Type**      | **Description**                       |
+|---------------------|---------------|---------------------------------------|
+| game_config         | `Game`        | Game configuration attributes         |
+| email_config        | `EmailServer` | Email server configuration attributes |
+| participants        | `dict`        | Game participants                     |
+
+The constructor will raise an `InvalidConfigurationException` exception if the validation of the participants argument fails. The validation will fail if the structure does not have the expected fields and field types or if the scenario cannot be solved due to the specified restrictions.
+
+###### Methods
+
+| **Signature** | **Description**                                                                                                                                                                                                                                                       | **Return** | **Throws** |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|------------|
+| dry_run()     | Creates giver-receiver pairings applying the specified participant restrictions. Doesn't send any email communication. Use this method to test your scenario configuration. The first element of the returned value represents the giver and the second the receiver. | `list`     | -          |
+| play()        | Creates giver-receiver pairings applying the specified participant restrictions. Sends individual emails to participants to let them know whom they have to gift. The first element of the returned value represents the giver and the second the receiver.           | `list`     | -          |
+
+
+</details>
