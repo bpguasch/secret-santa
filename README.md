@@ -34,7 +34,7 @@ You can now review the [usage instructions](#usage-instructions).
 
 AWS Lambda is a serverless compute service that lets you run code without provisioning or managing servers. This Python package is provided as well as an AWS Lambda Layer for you to use in your functions. Follow these steps to add the Secret Santa Lambda Layer to your AWS Lambda function:
 
-1. From this repository, download the **secret_santa_layer.tar.gz** file
+1. From this repository, download the **python.zip** file
 2. Navigate to the AWS Lambda section in the AWS Console, and select **Layers** under **Additional resources**
 3. Select **Create layer**, give it a name and upload the file you recently downloaded
 4. Open the Lambda function in which you would like to use the layer
