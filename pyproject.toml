@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secret_santa_bpguasch"
+version = "0.0.1"
+authors = [
+  { name="Borja Pérez Guasch", email="bpguasch@icloud.com" },
+]
+description = "A package that implements the Secret Santa algorithm and notifies participants by email of whom they have to gift."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/bpguasch/secret-santa"
+"Bug Tracker" = "https://github.com/bpguasch/secret-santa/issues"

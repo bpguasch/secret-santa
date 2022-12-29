@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# PyPi files
+src/dist
+
+# Jetbrains files
+.idea
